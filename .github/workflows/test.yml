@@ -1,0 +1,16 @@
+name: Test Go Actions
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Test gh-propgen Action
+        uses: ./.github/actions/gh-propgen
