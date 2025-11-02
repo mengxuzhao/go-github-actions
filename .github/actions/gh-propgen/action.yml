@@ -1,0 +1,8 @@
+name: "Go PropGen Action"
+description: "Generate build.properties and deploy.properties from vars/secrets"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - run: ./gh-propgen
+      shell: bash
