@@ -1,0 +1,31 @@
+name: Build and Publish gh-propgen Action
+on: 
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.13'
+
+      - name: Build gh-propgen Action
+        run: |
+          cd .github/actions/gh-propgen
+          go build -o gh-propgen main.go
+      
+      - name: Check gh-propgen Action
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .github/actions/gh-propgen/gh-propgen
+          git commit -m "Add/Update action binary"
+          git push
